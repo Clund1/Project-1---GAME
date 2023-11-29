@@ -1,16 +1,19 @@
 *{
-    font-family: fantasy;
+    font-family: chalkduster, fantasy;
     box-sizing: border-box;
 }
 
 body{
     height:100vh;
     flex-direction:column;
+    background-color: burlywood;
 }
 main{
     display: grid;
-    grid-template-columns: 30vmin, 30vmin, 30vmin, 30vmin, 30vmin;
-    grid-template-rows: 30vmin, 30vmin, 30vmin, 30vmin, 30vmin;
+    grid-template-columns: repeat(5, 10vmin);
+    grid-template-rows: repeat(5, 10vmin);
+    background-color: antiquewhite;
+    margin-top: 15vmin;
 }
 
 main * {
@@ -19,18 +22,50 @@ main * {
     align-items: center;
 }
 
+.box{
+    border: 1vmin solid burlywood;
+}
+
 .flex-ctr {
     display:flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
+
+.bar {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+}
+
+.counter {
+    margin: 2vmin;
+    padding-top: 1vmin;
+    border: .5vmin solid antiquewhite;
+    width: 25vmin;
+    height: 15vmin;
+    text-align: center;
+}
+.matches{
+    font-family: fantasy, blippo;
+    font-size: 6vmin;
+}
+
+h1{
+    font-style: italic;
+    margin: 2vmin;
+    font-size: 5vmin;
+}
+
 button{
     justify-self: center;
     width: 20vmin;
     margin: 1vmin;
     background-color: antiquewhite;
     color: black;
-    font-size: 3vmin;
-    outline: none;
-    border-radius: 4vmin;
+    font-size: 2vmin;
+    outline: 1vmin;
+    border-radius: 5vmin;
+    display: block;
 }
