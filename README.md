@@ -1,7 +1,7 @@
 # Project-1---GAME
 
 # # Goblin-Match (or Goblincentration) # #
-  -- A bunch of goblins are hiding from you in the brush! Can you match them all? --
+  -- A buncha goblins are hiding from you in the brush! Can you match them all? --
 ## Wireframes
 ![Wireframe](imgs/WireFrame.drawio.png)
 
@@ -23,5 +23,5 @@
 
 ##### Font
 ```css
-font-family: Arial, Helvetica, sans-serif;
+font-family: fantasy;
 ```

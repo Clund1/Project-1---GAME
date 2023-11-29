@@ -1,0 +1,36 @@
+*{
+    font-family: fantasy;
+    box-sizing: border-box;
+}
+
+body{
+    height:100vh;
+    flex-direction:column;
+}
+main{
+    display: grid;
+    grid-template-columns: 30vmin, 30vmin, 30vmin, 30vmin, 30vmin;
+    grid-template-rows: 30vmin, 30vmin, 30vmin, 30vmin, 30vmin;
+}
+
+main * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-ctr {
+    display:flex;
+    justify-content: center;
+    align-items: baseline;
+}
+button{
+    justify-self: center;
+    width: 20vmin;
+    margin: 1vmin;
+    background-color: antiquewhite;
+    color: black;
+    font-size: 3vmin;
+    outline: none;
+    border-radius: 4vmin;
+}
