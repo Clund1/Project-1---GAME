@@ -8,35 +8,29 @@ body{
     flex-direction:column;
     background-color: burlywood;
 }
-main{
-    display: grid;
-    grid-template-columns: repeat(5, 10vmin);
-    grid-template-rows: repeat(5, 10vmin);
-    background-color: antiquewhite;
-    margin-top: 15vmin;
-}
-
-main * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.box{
-    border: 1vmin solid burlywood;
-}
-
 .flex-ctr {
     display:flex;
     justify-content: center;
     align-items: center;
 }
 
+main{
+    display: grid;
+    grid-template-columns: repeat(5, 10vmin);
+    grid-template-rows: repeat(5, 10vmin);
+    margin: 10vmin;
+    margin-right: 18vmin;
+    gap: 2vmin;
+}
+
+.box{
+    background-color: brown;
+}
+
 .bar {
     display: flex;
     align-items: center;
     align-content: center;
-    height: 100%;
 }
 
 .counter {
@@ -44,7 +38,7 @@ main * {
     padding-top: 1vmin;
     border: .5vmin solid antiquewhite;
     width: 25vmin;
-    height: 15vmin;
+    height: 12vmin;
     text-align: center;
 }
 .matches{
@@ -54,8 +48,8 @@ main * {
 
 h1{
     font-style: italic;
-    margin: 2vmin;
-    font-size: 5vmin;
+    margin: 1vmin;
+    font-size: 4.5vmin;
 }
 
 button{
@@ -68,4 +62,7 @@ button{
     outline: 1vmin;
     border-radius: 5vmin;
     display: block;
+}
+button:hover {
+    transform: scale(110%);
 }
