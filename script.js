@@ -1,5 +1,6 @@
 /**---------- PLAN OF ACTION ----------**/
 //Identify and Initialize State Variables
+
 //init correctMatch value
 //init wrongMatch value
 //If player makes all matches, let winCondition runs
@@ -29,37 +30,52 @@ const boardEl = document.querySelectorAll('.box')
 // contains both play and retry, both hold same function
 const playButton = document.querySelectorAll('button')
 
+const gameFieldEl = document.querySelectorAll('.gameField')
+
 /**---------- INITIAL STATE VARIABLE ----------**/
-let boardArr= null
+let forest = []
 let choice1 
 let choice2
 let correctMatch = 0
 let wrongMatch = 0
 let id = 0
 /**---------- FUNCTIONS ----------**/
+function initialize() {
+    forest = [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]
+    for (let i = 0; i < 25; i++) {
+        forest.push(Math.floor(Math.random() * 6))
+    }
+    gameFieldEl.forEach((box) => {
+        box.addEventListener('click', (e) => {
+            scatter(e);
+        });
+    })
+
+    render()
+}
 function render() {
     renderForest()
-    playerChoice(id,id)
     determineWin()
 }
 render()
-console.log(playerChoice(id,id))
+console.log(render)
 //RENDER GAME PLAYING FIELD//
 function renderForest(){
-    boardArr= []
-    for (let i = 0; i < 25; i++) {
-        boardArr.push(Math.floor(Math.random() * 6))
-    }
-    let tiles= document.querySelectorAll(".box")
-    tiles.forEach((tile)=>{
-        tile.addEventListener('click',()=>{
-            id = tile.id
-            tileArrPosition = boardArr[id]
-            tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
-            return id
+    forest.forEach((colArr, colIdx) => {
+        colArr.forEach((cellVal, rowIdx) => {
+            const cellId = `x${colIdx}y${rowIdx}`
+            const cellEl = document.getElementById(cellId)
+            cellEl.style.backgroundColor = FORESTLOOKUP[cellVal]
         })
     })
 }
+
 //DETERMINES IF MATCH IS TRUE OR FALSE
 function playerChoice (choice1, choice2){//Player Choice will always contain 2 choices
     if (choice1 === choice2){
@@ -80,4 +96,13 @@ function determineWin(){
         return false
     }
 }
+
+//SCATTER FUNCTION
+function scatter(oClick){
+
+}
+
+//POWER RANGERS DRAGOFORCE GO!
+initialize()
+
 /**---------- EVENT LISTENERS ----------**/
