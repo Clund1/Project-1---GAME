@@ -47,12 +47,13 @@ function renderForest(){
     }
     let tiles= document.querySelectorAll(".box")
     tiles.forEach((tile)=>{
-        //tile.addEventListener('click',()=>{
+        tile.addEventListener('click',()=>{
             id = tile.id
             tileArrPosition = boardArr[id]
             tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
     })
-}
+}}
+//DETERMINES IF MATCH IS TRUE OR FALSE
 let playerChoice = (choice1, choice2) =>{//Player Choice will always contain 2 choices
     if (choice1 === choice2){
         return correctMatch++ //if choices are equal return truthy value
@@ -73,8 +74,3 @@ function determineWin(){
 }
 console.log(determineWin())
 /**---------- EVENT LISTENERS ----------**/
-tile.addEventListener('click',()=>{
-    id = tile.id
-    tileArrPosition = boardArr[id]
-    tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
-})
