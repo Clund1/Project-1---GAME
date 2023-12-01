@@ -1,15 +1,15 @@
 /**---------- PLAN OF ACTION ----------**/
 //Identify and Initialize State Variables
-//init correctChoice value
-//init wrong value
+//init correctMatch value
+//init wrongMatch value
 //If player makes all matches, let winCondition runs
-//If Player makes 3 wrong matches loseCondition runs
+//If Player makes X amount of wrong matches loseCondition runs
 //init board
 //Code main render()
 //Code Start/Retry buttons as initial renderer - same job
 //Code main<divs> into gameboard("forest") using forEach array function
 //Code click event listeners
-//Code to either recover tiles or add +1 to goblinsFound
+//Code to either add +1 to correctMatch or +1 to wrongMatch determined on playerChoice function
 //Code winCondition
 
 /**---------- CONSTANTS ----------**/
@@ -35,10 +35,14 @@ let choice1
 let choice2
 let correctMatch = 0
 let wrongMatch = 0
+let id = 0
 /**---------- FUNCTIONS ----------**/
-function start() {
+function render() {
     renderForest()
+    playerChoice(id,id)
+    determineWin()
 }
+render()
 //RENDER GAME PLAYING FIELD//
 function renderForest(){
     boardArr= []
@@ -51,8 +55,10 @@ function renderForest(){
             id = tile.id
             tileArrPosition = boardArr[id]
             tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
+            return id
+        })
     })
-}}
+}
 //DETERMINES IF MATCH IS TRUE OR FALSE
 let playerChoice = (choice1, choice2) =>{//Player Choice will always contain 2 choices
     if (choice1 === choice2){
@@ -61,6 +67,7 @@ let playerChoice = (choice1, choice2) =>{//Player Choice will always contain 2 c
         return wrongMatch++ //if choice are different return falsey value
     }
 }
+
 //Determines WIN
 function determineWin(){
     const winner = (correctMatch === 6)
@@ -72,5 +79,4 @@ function determineWin(){
         return false
     }
 }
-console.log(determineWin())
 /**---------- EVENT LISTENERS ----------**/
