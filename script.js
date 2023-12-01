@@ -43,6 +43,7 @@ function render() {
     determineWin()
 }
 render()
+console.log(playerChoice(id,id))
 //RENDER GAME PLAYING FIELD//
 function renderForest(){
     boardArr= []
@@ -60,7 +61,7 @@ function renderForest(){
     })
 }
 //DETERMINES IF MATCH IS TRUE OR FALSE
-let playerChoice = (choice1, choice2) =>{//Player Choice will always contain 2 choices
+function playerChoice (choice1, choice2){//Player Choice will always contain 2 choices
     if (choice1 === choice2){
         return correctMatch++ //if choices are equal return truthy value
         }else{
