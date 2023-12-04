@@ -1,6 +1,5 @@
 /**---------- PLAN OF ACTION ----------**/
 //Identify and Initialize State Variables
-
 //init correctMatch value
 //init wrongMatch value
 //If player makes all matches, let winCondition runs
@@ -25,11 +24,11 @@ const FORESTLOOKUP = {
     7:'orange' //goblin_match_pair 6
 }
 /**---------- CACHED ELEMENT REFs ----------**/
-// contains playing field
+// Each Selectable box
 const boardEl = document.querySelectorAll('.box')
 // contains both play and retry, both hold same function
 const playButton = document.querySelectorAll('button')
-
+//Contains entire Playing Field
 const gameFieldEl = document.querySelectorAll('.gameField')
 
 /**---------- INITIAL STATE VARIABLE ----------**/
@@ -40,7 +39,8 @@ let correctMatch = 0
 let wrongMatch = 0
 let id = 0
 /**---------- FUNCTIONS ----------**/
-function initialize() {
+//ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
+function initialLaunch() {
     forest = [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -48,47 +48,49 @@ function initialize() {
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
     ]
-    for (let i = 0; i < 25; i++) {
-        forest.push(Math.floor(Math.random() * 6))
-    }
-    gameFieldEl.forEach((box) => {
-        box.addEventListener('click', (e) => {
-            scatter(e);
-        });
-    })
-
-    render()
-}
-function render() {
-    renderForest()
-    determineWin()
-}
-render()
-console.log(render)
-//RENDER GAME PLAYING FIELD//
-function renderForest(){
     forest.forEach((colArr, colIdx) => {
         colArr.forEach((cellVal, rowIdx) => {
-            const cellId = `x${colIdx}y${rowIdx}`
-            const cellEl = document.getElementById(cellId)
-            cellEl.style.backgroundColor = FORESTLOOKUP[cellVal]
+            let scatter = Math.floor(Math.random() * 6);
+            cellVal * scatter
+            return cellVal
         })
+    console.log(forest)
+    gameFieldEl.forEach((box) => {
+        box.addEventListener('click', (e) => {
+            playerTurn(e);
+        });
     })
+    render()
+})}
+function render() {
+    // renderForest()
+    determineWin()
 }
+// for (let i = 0; i < 25; i++) {
+
+//RENDER GAME PLAYING FIELD//
+// function renderForest(){
+//     forest.forEach((colArr, colIdx) => {
+//             const cellId = `x${colIdx}y${rowIdx}`
+//             const cellEl = document.getElementById(cellId)
+//             cellEl.style.backgroundColor = FORESTLOOKUP[cellVal]
+//         })
+//     })
+// }
 
 //DETERMINES IF MATCH IS TRUE OR FALSE
-function playerChoice (choice1, choice2){//Player Choice will always contain 2 choices
+function playerChoice (choice1, choice2){ //Player Choice will always contain 2 choices
     if (choice1 === choice2){
-        return correctMatch++ //if choices are equal return truthy value
+        return correctMatch++ //if choices are equal return ++truthy value
         }else{
-        return wrongMatch++ //if choice are different return falsey value
+        return wrongMatch++ //if choice are different return ++falsey value
     }
 }
 
-//Determines WIN
+//DETERMINES WIN
 function determineWin(){
-    const winner = (correctMatch === 6)
-    const loser = (wrongMatch === 4)
+    const winner = (correctMatch === 6) //if player makes 6 correct matches, they win
+    const loser = (wrongMatch === 4) //if player makes 4 wrong matches, they lose
     if (winner === true){
         return true
         }
@@ -97,12 +99,8 @@ function determineWin(){
     }
 }
 
-//SCATTER FUNCTION
-function scatter(oClick){
-
-}
 
 //POWER RANGERS DRAGOFORCE GO!
-initialize()
+initialLaunch()
 
 /**---------- EVENT LISTENERS ----------**/
