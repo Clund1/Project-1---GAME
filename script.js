@@ -38,45 +38,35 @@ let choice2
 let correctMatch = 0
 let wrongMatch = 0
 let id = 0
+let scatter
+let i = 0
+let hidingSpots
 /**---------- FUNCTIONS ----------**/
 //ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
 function initialLaunch() {
     forest = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
+        generateHidingSpots(),
+        generateHidingSpots(),
+        generateHidingSpots(),
+        generateHidingSpots(),
+        generateHidingSpots()
     ]
-    forest.forEach((colArr, colIdx) => {
-        colArr.forEach((cellVal, rowIdx) => {
-            let scatter = Math.floor(Math.random() * 6);
-            cellVal * scatter
-            return cellVal
-        })
     console.log(forest)
     gameFieldEl.forEach((box) => {
         box.addEventListener('click', (e) => {
             playerTurn(e);
         });
     })
-    render()
-})}
-function render() {
-    // renderForest()
-    determineWin()
 }
-// for (let i = 0; i < 25; i++) {
 
-//RENDER GAME PLAYING FIELD//
-// function renderForest(){
-//     forest.forEach((colArr, colIdx) => {
-//             const cellId = `x${colIdx}y${rowIdx}`
-//             const cellEl = document.getElementById(cellId)
-//             cellEl.style.backgroundColor = FORESTLOOKUP[cellVal]
-//         })
-//     })
-// }
+function generateHidingSpots() {
+    for (let i = 0; i < 5; i++) {
+      const randomNumber = [Math.floor(Math.random() * 8)]; 
+    forest.push(randomNumber);
+    }
+    i=0
+    return forest;
+}
 
 //DETERMINES IF MATCH IS TRUE OR FALSE
 function playerChoice (choice1, choice2){ //Player Choice will always contain 2 choices
@@ -86,6 +76,7 @@ function playerChoice (choice1, choice2){ //Player Choice will always contain 2 
         return wrongMatch++ //if choice are different return ++falsey value
     }
 }
+// for (let i = 0; i < 25; i++) {
 
 //DETERMINES WIN
 function determineWin(){
@@ -99,8 +90,7 @@ function determineWin(){
     }
 }
 
-
-//POWER RANGERS DRAGOFORCE GO!
+//POWER RANGERS DRAGONFORCE GO!
 initialLaunch()
 
 /**---------- EVENT LISTENERS ----------**/
