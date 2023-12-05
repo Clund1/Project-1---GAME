@@ -30,17 +30,22 @@ const goblinEl = document.querySelectorAll('.goblin')
 const playButton = document.querySelector('button')
 //Contains entire Playing Field
 const forestEl = document.querySelectorAll('.forest')
+//Contains Win/Loss Message
+const messageEl = document.querySelectorAll('.winLoseMessage')
+//Contains Amouunts of correct/incorrect Matches
+const matchesEl = document.querySelector('.matches')
 
 /**---------- INITIAL STATE VARIABLE ----------**/
-let forest = []
-let choice1 
-let choice2
-let correctMatch = 0
-let wrongMatch = 0
-let id = 0
-let scatter
-let i = 0
-let hidingSpots
+let forest = [];
+let choice1;
+let choice2;
+let correctMatch = 0;
+let wrongMatch = 0;
+let id = 0;
+let i = 0;
+let hidingSpots;
+let tileArrPosition = 0;
+
 /**---------- FUNCTIONS ----------**/
 //ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
 function initialLaunch() {
@@ -48,7 +53,7 @@ function initialLaunch() {
         goblins: [],
         generateHidingSpots() {
             for (let i = 0; i < 5; i++) {
-                arr = []
+                arr = [];
                 for (let j = 0; j < 5; j++) {
                 const randomNumber = Math.floor(Math.random() * 8); 
                 arr.push(randomNumber);
@@ -57,16 +62,19 @@ function initialLaunch() {
             }
         }
     }
-    forest.generateHidingSpots()
-    goblinEl.forEach((tile) => {tile.addEventListener('click',() => {
-            id = tile.id
-            console.log(id)
-            console.log(forest.goblins)
-            tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]
-            console.log(tileArrPosition)
-            tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
-        })
+    forest.generateHidingSpots() //This generates random spawn of goblins on forest
+    goblinEl.forEach((tile) =>{
+            id = tile.id;
+            tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]; // takes ID of each goblin space to formulate reference
+            console.log(tileArrPosition);
+            tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]; //uses FORESTLOOKUP to ref. background color/url choice
     })
+setTimeout(hide,5000); //5 seconds to memorize then hide
+}
+
+//HIDES CHOICES
+function hide(){
+    goblinEl.style.visibility = "hidden";
 }
 
 //TAKES INFO FOR FIRST CLICK
@@ -76,27 +84,43 @@ function initialLaunch() {
 //DETERMINES IF MATCH IS TRUE OR FALSE
 function playerChoice (choice1, choice2){ //Player Choice will always contain 2 choices
     if (choice1 === choice2){
-        return correctMatch++ //if choices are equal return ++truthy value
+        return correctMatch++; //if choices are equal return ++truthy value
         }else{
-        return wrongMatch++ //if choice are different return ++falsey value
+        return wrongMatch++; //if choice are different return ++falsey value
     }
 }
 
 //DETERMINES WIN
 function determineWin(){
-    const winner = (correctMatch === 6) //if player makes 6 correct matches, they win
-    const loser = (wrongMatch === 4) //if player makes 4 wrong matches, they lose
-    if (winner === true){
-        return true
+    const winner = (correctMatch === 6); //if player makes 6 correct matches, they win
+    const loser = (wrongMatch === 4); //if player makes 4 wrong matches, they lose
+    if (winner === true){ //if WIN remove gameboard and add win text
+        forest.style.display = "none"
+        messageEl.innerText = 'YOU HAVE WON!';
         }
-    if(loser === true){
-        return false
+    if(loser === true){ // if LOSE remove gameboard and add loss text
+        forest.style.display = "none";
+        messageEl.innerText = 'YOU HAVE LOST!';
     }
 }
-
 
 
 //POWER RANGERS DRAGONFORCE GO!
 
 /**---------- EVENT LISTENERS ----------**/
-playButton.addEventListener ('click',initialLaunch);
+
+//Launch Button
+playButton.addEventListener ('click', () =>{
+    initialLaunch(); //launches gameboard
+    playButton.style.backgroundColor = "brown";// 'hides' functionality
+    playButton.style.color = "warm grey";
+
+});
+
+//Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
+    //on click of goblin tile store tileArrPosition
+// goblinEl.addEventListener('click',()=>{
+//     for (tileArrPosition of goblinEl)
+
+//     })
+

@@ -28,6 +28,7 @@ main{
 .goblin{
     border: .2vmin solid brown;
     border-radius: .75vmin;
+    visibility: visible;
 }
 
 .bar {
