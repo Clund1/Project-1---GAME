@@ -20,11 +20,14 @@ main{
     grid-template-rows: repeat(5, 10vmin);
     margin: 10vmin;
     margin-right: 18vmin;
-    gap: 2vmin;
+    gap: 2.5vmin;
+    border: .5vmin solid brown;
+    border-radius: 1.5vmin;
 }
 
-.box{
-    background-color: brown;
+.goblin{
+    border: .2vmin solid brown;
+    border-radius: .75vmin;
 }
 
 .bar {

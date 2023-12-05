@@ -25,11 +25,11 @@ const FORESTLOOKUP = {
 }
 /**---------- CACHED ELEMENT REFs ----------**/
 // Each Selectable box
-const boardEl = document.querySelectorAll('.box')
+const goblinEl = document.querySelectorAll('.goblin')
 // contains both play and retry, both hold same function
-const playButton = document.querySelectorAll('button')
+const playButton = document.querySelector('button')
 //Contains entire Playing Field
-const gameFieldEl = document.querySelectorAll('.gameField')
+const forestEl = document.querySelectorAll('.forest')
 
 /**---------- INITIAL STATE VARIABLE ----------**/
 let forest = []
@@ -44,29 +44,34 @@ let hidingSpots
 /**---------- FUNCTIONS ----------**/
 //ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
 function initialLaunch() {
-    forest = [
-        generateHidingSpots(),
-        generateHidingSpots(),
-        generateHidingSpots(),
-        generateHidingSpots(),
-        generateHidingSpots()
-    ]
-    console.log(forest)
-    gameFieldEl.forEach((box) => {
-        box.addEventListener('click', (e) => {
-            playerTurn(e);
-        });
+    forest = {
+        goblins: [],
+        generateHidingSpots() {
+            for (let i = 0; i < 5; i++) {
+                arr = []
+                for (let j = 0; j < 5; j++) {
+                const randomNumber = Math.floor(Math.random() * 8); 
+                arr.push(randomNumber);
+                }
+                this.goblins.push(arr)
+            }
+        }
+    }
+    forest.generateHidingSpots()
+    goblinEl.forEach((tile) => {tile.addEventListener('click',() => {
+            id = tile.id
+            console.log(id)
+            console.log(forest.goblins)
+            tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]
+            console.log(tileArrPosition)
+            tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]
+        })
     })
 }
 
-function generateHidingSpots() {
-    for (let i = 0; i < 5; i++) {
-      const randomNumber = [Math.floor(Math.random() * 8)]; 
-    forest.push(randomNumber);
-    }
-    i=0
-    return forest;
-}
+//TAKES INFO FOR FIRST CLICK
+
+
 
 //DETERMINES IF MATCH IS TRUE OR FALSE
 function playerChoice (choice1, choice2){ //Player Choice will always contain 2 choices
@@ -76,7 +81,6 @@ function playerChoice (choice1, choice2){ //Player Choice will always contain 2 
         return wrongMatch++ //if choice are different return ++falsey value
     }
 }
-// for (let i = 0; i < 25; i++) {
 
 //DETERMINES WIN
 function determineWin(){
@@ -90,7 +94,9 @@ function determineWin(){
     }
 }
 
+
+
 //POWER RANGERS DRAGONFORCE GO!
-initialLaunch()
 
 /**---------- EVENT LISTENERS ----------**/
+playButton.addEventListener ('click',initialLaunch);
