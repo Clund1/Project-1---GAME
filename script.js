@@ -75,8 +75,8 @@ function initialLaunch() {
 //HIDES CHOICES
 function hide(){
     goblinEls.forEach((goblin) =>{
-        goblin.style.backgroundimage = "";
-        // console.log(goblin)
+        goblin.style.backgroundImage = "";
+        console.log(goblin)
     })
 }
 
@@ -85,10 +85,6 @@ function hide(){
 
 
 // }
-
-
-//TAKES INFO FOR FIRST CLICK
-
 
 
 //DETERMINES IF MATCH IS TRUE OR FALSE
@@ -131,7 +127,10 @@ playButton.addEventListener ('click', () =>{
 
 //Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
     //on click of goblin tile store tileArrPosition
-// goblin.addEventListener('click',()=>{
-//     forEach ()
-// })
+goblin.addEventListener('click',(e)=>{
+    forEach (goblin.e)
+    //PUSH tileArrPosition into Choice 1 and Choice 2 Variables
+    let Choice1 = goblin.e.tileArrPosition;
+    let Choice2 = goblin.e.tileArrPosition; 
+})
 
