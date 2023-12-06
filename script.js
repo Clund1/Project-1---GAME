@@ -80,9 +80,16 @@ function hide(){
     })
 }
 
-//HANDLE PLAYER TURN (EVENT LISTENER 'CLICK' GATHERS THE [tileArrPosition] OF EACH CLICK => OUTPUT to playerChoice input Choice1 or Choice2)
-// function playerTurn(){
+//HANDLE PLAYER TURN (EVENT LISTENER 'CLICK' GATHERS THE [tileArrPosition] OF EACH CLICK => OUTPUT to playerChoice input Choice1 || Choice2)
 
+//Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
+//on click of goblin tile store tileArrPosition
+goblinEls.forEach((tile) => {tile.addEventListener('click',() => {
+    id = tile.id
+    tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]
+    tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]
+    })
+})
 
 // }
 
@@ -120,17 +127,6 @@ function determineWin(){
 //Launch Button
 playButton.addEventListener ('click', () =>{
     initialLaunch(); //launches gameboard
-    playButton.style.backgroundColor = "brown";// 'hides' functionality
+    playButton.style.backgroundColor = "brown";// shows 'change' in functionality
     playButton.style.color = "burlywood";
-
 });
-
-//Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
-    //on click of goblin tile store tileArrPosition
-goblin.addEventListener('click',(e)=>{
-    forEach (goblin.e)
-    //PUSH tileArrPosition into Choice 1 and Choice 2 Variables
-    let Choice1 = goblin.e.tileArrPosition;
-    let Choice2 = goblin.e.tileArrPosition; 
-})
-

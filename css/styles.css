@@ -56,9 +56,16 @@ main{
     font-size: 6vmin;
 }
 
+.objective{
+    color: burlywood;
+    margin-bottom: 2vmin;
+    font-size: 2vmin;
+    font-style: italic;
+}
+
 h1{
     color: burlywood;
-    font-style: italic;
+    font-style: bold;
     margin: 1vmin;
     font-size: 4.5vmin;
 }
