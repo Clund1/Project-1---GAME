@@ -1,12 +1,14 @@
 *{
-    font-family: chalkduster, fantasy;
+    font-family: 'Marker Felt', fantasy;
     box-sizing: border-box;
 }
 
 body{
     height:100vh;
     flex-direction:column;
-    background-color: burlywood;
+    background-image: url("/imgs/ForestImg.png");
+    background-size: auto;
+    background-position: center;
 }
 .flex-ctr {
     display:flex;
@@ -21,14 +23,15 @@ main{
     margin: 10vmin;
     margin-right: 18vmin;
     gap: 2.5vmin;
-    border: .5vmin solid brown;
+    border: .5vmin solid burlywood;
     border-radius: 1.5vmin;
 }
 
 .goblin{
-    border: .2vmin solid brown;
+    border: .2vmin solid burlywood;
     border-radius: .75vmin;
     visibility: visible;
+    background-size: cover;
 }
 
 .bar {
@@ -40,10 +43,12 @@ main{
 .counter {
     margin: 2vmin;
     padding-top: 1vmin;
-    border: .5vmin solid antiquewhite;
+    border: .75vmin solid burlywood;
+    border-radius: .75vmin;
     width: 25vmin;
     height: 12vmin;
     text-align: center;
+    color: burlywood;
 }
 .matches{
     font-family: fantasy, blippo;
@@ -51,6 +56,7 @@ main{
 }
 
 h1{
+    color: burlywood
     font-style: italic;
     margin: 1vmin;
     font-size: 4.5vmin;
@@ -58,13 +64,14 @@ h1{
 
 button{
     justify-self: center;
-    width: 20vmin;
+    width: 15vmin;
+    height:6vmin;
     margin: 1vmin;
-    background-color: antiquewhite;
+    background-color: burlywood;
     color: black;
-    font-size: 2vmin;
+    font-size: 2.3vmin;
     outline: 1vmin;
-    border-radius: 5vmin;
+    border-radius: 4.75vmin;
     display: block;
 }
 button:hover {

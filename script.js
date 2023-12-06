@@ -14,18 +14,18 @@
 
 /**---------- CONSTANTS ----------**/
 const FORESTLOOKUP = {
-    0:'', //empty space
-    1:'brown', //hiding spot
-    2:'green', //goblin_match_pair 1
-    3:'blue', //goblin_match_pair 2
-    4:'red', //goblin_match_pair 3
-    5:'purple', //goblin_match_pair 4
-    6:'turquoise', //goblin_match_pair 5
-    7:'orange' //goblin_match_pair 6
+    0:'url(imgs/Goblin0.png)', //empty space
+    1:'url(imgs/Goblin1.png)', //hiding spot
+    2:'url(imgs/Goblin2.png)', //goblin_match_pair 1
+    3:'url(imgs/Goblin3.png)', //goblin_match_pair 2
+    4:'url(imgs/Goblin4.png)', //goblin_match_pair 3
+    5:'url(imgs/Goblin5.png)', //goblin_match_pair 4
+    6:'url(imgs/Goblin6.png)', //goblin_match_pair 5
+    7:'url(imgs/Goblin7.png)' //goblin_match_pair 6
 }
 /**---------- CACHED ELEMENT REFs ----------**/
 // Each Selectable box
-const goblinEl = document.querySelectorAll('.goblin')
+const goblinEls = document.querySelectorAll('.goblin')
 // contains both play and retry, both hold same function
 const playButton = document.querySelector('button')
 //Contains entire Playing Field
@@ -41,11 +41,10 @@ let choice1;
 let choice2;
 let correctMatch = 0;
 let wrongMatch = 0;
-let id = 0;
+let id;
 let i = 0;
 let hidingSpots;
-let tileArrPosition = 0;
-
+let tileArrPosition;
 /**---------- FUNCTIONS ----------**/
 //ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
 function initialLaunch() {
@@ -63,19 +62,30 @@ function initialLaunch() {
         }
     }
     forest.generateHidingSpots() //This generates random spawn of goblins on forest
-    goblinEl.forEach((tile) =>{
+    goblinEls.forEach((tile) =>{
             id = tile.id;
             tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]; // takes ID of each goblin space to formulate reference
-            console.log(tileArrPosition);
-            tile.style.backgroundColor = FORESTLOOKUP[tileArrPosition]; //uses FORESTLOOKUP to ref. background color/url choice
-    })
-setTimeout(hide,5000); //5 seconds to memorize then hide
+            //console.log(tileArrPosition);
+            //console.log(tile);
+            tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]; //uses FORESTLOOKUP to ref. background image choice
+            })
+    setTimeout(hide,5000); //5 seconds to memorize then hide
 }
 
 //HIDES CHOICES
 function hide(){
-    goblinEl.style.visibility = "hidden";
+    goblinEls.forEach((goblin) =>{
+        goblin.style.backgroundimage = "";
+        // console.log(goblin)
+    })
 }
+
+//HANDLE PLAYER TURN (EVENT LISTENER 'CLICK' GATHERS THE [tileArrPosition] OF EACH CLICK => OUTPUT to playerChoice input Choice1 or Choice2)
+// function playerTurn(){
+
+
+// }
+
 
 //TAKES INFO FOR FIRST CLICK
 
@@ -101,6 +111,8 @@ function determineWin(){
     if(loser === true){ // if LOSE remove gameboard and add loss text
         forest.style.display = "none";
         messageEl.innerText = 'YOU HAVE LOST!';
+        playButton.style.backgroundColor = "antiqueWhite";// 'hides' functionality
+        playButton.style.color = "black";
     }
 }
 
@@ -113,14 +125,13 @@ function determineWin(){
 playButton.addEventListener ('click', () =>{
     initialLaunch(); //launches gameboard
     playButton.style.backgroundColor = "brown";// 'hides' functionality
-    playButton.style.color = "warm grey";
+    playButton.style.color = "burlywood";
 
 });
 
 //Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
     //on click of goblin tile store tileArrPosition
-// goblinEl.addEventListener('click',()=>{
-//     for (tileArrPosition of goblinEl)
-
-//     })
+// goblin.addEventListener('click',()=>{
+//     forEach ()
+// })
 
