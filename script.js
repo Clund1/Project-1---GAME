@@ -32,8 +32,10 @@ const playButton = document.querySelector('button')
 const forestEl = document.querySelectorAll('.forest')
 //Contains Win/Loss Message
 const messageEl = document.querySelectorAll('.winLoseMessage')
-//Contains Amouunts of correct/incorrect Matches
-const matchesEl = document.querySelector('.matches')
+//Contains Amount of correctMatches
+const correctMatchesEl = document.querySelector('.correctMatches')
+//Contains Amount of wrongMatches
+const wrongMatchesEl = document.querySelector('.wrongMatches')
 
 /**---------- INITIAL STATE VARIABLE ----------**/
 let forest = [];
@@ -45,11 +47,13 @@ let id;
 let i = 0;
 let hidingSpots;
 let tileArrPosition;
+let tile1;
+let tile2;
 /**---------- FUNCTIONS ----------**/
-//ON CLICK PLAY BUTTON - Creates Empty Grid , push random values then Add Event Listener to Each Choice
+//ON CLICK PLAY BUTTON -  then Add Event Listener to Each Choice
 function initialLaunch() {
     forest = {
-        goblins: [],
+        goblins: [], //Creates Empty Grid
         generateHidingSpots() {
             for (let i = 0; i < 5; i++) {
                 arr = [];
@@ -57,61 +61,80 @@ function initialLaunch() {
                 const randomNumber = Math.floor(Math.random() * 8); 
                 arr.push(randomNumber);
                 }
-                this.goblins.push(arr)
+                this.goblins.push(arr) // use random math to push random goblins into array filling grid
             }
         }
     }
-    forest.generateHidingSpots() //This generates random spawn of goblins on forest
+    forest.generateHidingSpots() //This generates which goblins ppear in which spot
     goblinEls.forEach((tile) =>{
             id = tile.id;
             tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]; // takes ID of each goblin space to formulate reference
-            //console.log(tileArrPosition);
-            //console.log(tile);
             tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]; //uses FORESTLOOKUP to ref. background image choice
             })
-    setTimeout(hide,5000); //5 seconds to memorize then hide
+    setTimeout(hide,5000); //5 seconds to memorize then the goblins hide
 }
 
 //HIDES CHOICES
 function hide(){
     goblinEls.forEach((goblin) =>{
         goblin.style.backgroundImage = "";
-        console.log(goblin)
     })
 }
 
 //HANDLE PLAYER TURN (EVENT LISTENER 'CLICK' GATHERS THE [tileArrPosition] OF EACH CLICK => OUTPUT to playerChoice input Choice1 || Choice2)
 
-//Takes tileArrPosition of goblin div and gives it to choice1 or choice 2
-//on click of goblin tile store tileArrPosition
-goblinEls.forEach((tile) => {tile.addEventListener('click',() => {
-    id = tile.id
-    tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]
-    tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]
+//Takes tileArrPosition of goblinsEl tile and gives to choice1 || choice 2
+goblinEls.forEach((tile) => {
+    tile.addEventListener('click',() => {
+        id = tile.id
+        tileArrPosition = forest.goblins[parseInt(id[1])][parseInt(id[3])]
+        //console.log(id)
+        tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]
+        if(!choice1){//If choice1 has no value
+            choice1 = tileArrPosition; //give choice1 value of tileArrPos.
+        //declare choice1 coordinates to global var
+        }else if(!choice2){ //If choice1 has value, look for value at choice2
+            choice2 = tileArrPosition; //If no value found, give choice2 value of tileArrPos.
+        //declare choice2 to global variable
+            checkForMatch(choice1,choice2) //compare choices & ++correctMatch || ++wrongMatch
+            console.log("this is wrongMatch", wrongMatch) 
+            console.log("this is correctMatch", correctMatch)
+            determineWin() //Check for when wrongMatch || correctMatch functions are met.. if so LET IT RIP and end game
+        }
     })
 })
 
-// }
-
-
 //DETERMINES IF MATCH IS TRUE OR FALSE
-function playerChoice (choice1, choice2){ //Player Choice will always contain 2 choices
-    if (choice1 === choice2){
+function checkForMatch (c1, c2){ //Player Choice will always contain 2 choices
+    if (c1 === c2){
+        choice1 = null;
+        choice2 = null; 
+        console.log("We got ONE!")  ; 
         return correctMatch++; //if choices are equal return ++truthy value
-        }else{
-        return wrongMatch++; //if choice are different return ++falsey value
+    }else{
+        console.log()
+        choice1 = null;//empty choice1
+        choice2 = null;//empty choice2
+        console.log("We Dont Got One!");
+        return wrongMatch++;
     }
+}
+
+//SHOWS WIN LOSE VALUES
+function renderScore(){
+    correctMatchesEl.innerText = `${correctMatch}`;
+    wrongMatchesEl.innerText =  `${wrongMatch}`;
 }
 
 //DETERMINES WIN
 function determineWin(){
     const winner = (correctMatch === 6); //if player makes 6 correct matches, they win
     const loser = (wrongMatch === 4); //if player makes 4 wrong matches, they lose
-    if (winner === true){ //if WIN remove gameboard and add win text
+    if (winner === true){ //if WINNER remove gameboard and add win text
         forest.style.display = "none"
         messageEl.innerText = 'YOU HAVE WON!';
         }
-    if(loser === true){ // if LOSE remove gameboard and add loss text
+    if(loser === true){ // if LOSER remove gameboard and add loss text
         forest.style.display = "none";
         messageEl.innerText = 'YOU HAVE LOST!';
         playButton.style.backgroundColor = "antiqueWhite";// 'hides' functionality
@@ -129,4 +152,7 @@ playButton.addEventListener ('click', () =>{
     initialLaunch(); //launches gameboard
     playButton.style.backgroundColor = "brown";// shows 'change' in functionality
     playButton.style.color = "burlywood";
+    correctMatch = 0;
+    wrongMatch = 0;
+
 });

@@ -20,7 +20,7 @@ main{
     display: grid;
     grid-template-columns: repeat(5, 10vmin);
     grid-template-rows: repeat(5, 10vmin);
-    margin: 10vmin;
+    margin: 2vmin;
     margin-right: 18vmin;
     gap: 2.5vmin;
     border: .5vmin solid burlywood;
@@ -30,9 +30,7 @@ main{
 .goblin{
     border: .2vmin solid burlywood;
     border-radius: .75vmin;
-    visibility: visible;
     background-size: cover;
-    background-color: 20% brown;
 }
 
 .bar {
@@ -42,32 +40,48 @@ main{
 }
 
 .counter {
-    margin: 2vmin;
+    margin: auto;
     padding-top: 1vmin;
-    border: .75vmin solid burlywood;
+    border: .6vmin solid burlywood;
     border-radius: .75vmin;
     width: 25vmin;
     height: 12vmin;
     text-align: center;
     color: burlywood;
+    display:block;
 }
-.matches{
+.correctMatches{
     font-family: fantasy, blippo;
-    font-size: 6vmin;
+    font-size: 8vmin;
+    color: green;
+    display:inline;
+}
+
+.wrongMatches{
+    font-family: fantasy, blippo;
+    font-size: 8vmin;
+    color: red;
+    display: inline;
+    margin-left: 4vmin;
 }
 
 .objective{
-    color: burlywood;
+    color: antiquewhite;
     margin-bottom: 2vmin;
     font-size: 2vmin;
-    font-style: italic;
+    font-style: bold;
+    font-variant: small-caps;
+    text-align: center;
+    align-content: center;
+    margin-right: 12vmin;
+    font-family: fantasy, blippo;
 }
 
 h1{
-    color: burlywood;
+    color: antiquewhite;
     font-style: bold;
     margin: 1vmin;
-    font-size: 4.5vmin;
+    font-size: 5vmin;
 }
 
 button{
