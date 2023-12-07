@@ -9,6 +9,7 @@ body{
     background-image: url("/imgs/ForestImg.png");
     background-size: auto;
     background-position: center;
+    background-repeat: repeat-x;
 }
 .flex-ctr {
     display:flex;

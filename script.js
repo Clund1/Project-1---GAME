@@ -97,8 +97,6 @@ goblinEls.forEach((tile) => {
             choice2 = tileArrPosition; //If no value found, give choice2 value of tileArrPos.
             tile2 = tile//declare choice2 to global variable
             checkForMatch(choice1,choice2) //compare choices & ++correctMatch || ++wrongMatch
-            console.log("this is wrongMatch", wrongMatch) 
-            console.log("this is correctMatch", correctMatch)
             renderScore()
             determineWin() //Check for when wrongMatch || correctMatch functions are met.. if so LET IT RIP and end game
         }
@@ -110,15 +108,12 @@ function checkForMatch (c1, c2){ //Player Choice will always contain 2 choices
     if (c1 === c2){
         choice1 = null;
         choice2 = null; 
-        console.log("We got ONE!")  ; 
         return correctMatch++; //if choices are equal return ++truthy value
     }else{
         tile1.style.backgroundImage = "";
         tile2.style.backgroundImage = "";
-        console.log()
         choice1 = null;//empty choice1
         choice2 = null;//empty choice2
-        console.log("We Dont Got One!");
         return wrongMatch++;
     }
 }
@@ -146,9 +141,6 @@ function determineWin(){
     }
 }
 
-
-//POWER RANGERS DRAGONFORCE GO!
-
 /**---------- EVENT LISTENERS ----------**/
 
 //Launch Button
@@ -160,5 +152,4 @@ playButton.addEventListener ('click', () =>{
     correctMatch = 0;
     wrongMatch = 0;
     renderScore()
-console.log("this is launch")
 });
