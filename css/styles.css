@@ -37,14 +37,17 @@ main{
     display: flex;
     align-items: center;
     align-content: center;
+    margin: auto;
+    padding-right: 10vmin;
 }
 
 .counter {
     margin: auto;
     padding-top: 1vmin;
+    margin-left: 1vmin;
     border: .6vmin solid burlywood;
     border-radius: .75vmin;
-    width: 25vmin;
+    width: 20vmin;
     height: 12vmin;
     text-align: center;
     color: burlywood;
