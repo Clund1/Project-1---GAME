@@ -29,9 +29,9 @@ const goblinEls = document.querySelectorAll('.goblin')
 // contains both play and retry, both hold same function
 const playButton = document.querySelector('button')
 //Contains entire Playing Field
-const forestEl = document.querySelectorAll('.forest')
+const forestEl = document.querySelector('#forest')
 //Contains Win/Loss Message
-const messageEl = document.querySelectorAll('.winLoseMessage')
+const messageEl = document.querySelector('#winLoseMessage')
 //Contains Amount of correctMatches
 const correctMatchesEl = document.querySelector('.correctMatches')
 //Contains Amount of wrongMatches
@@ -92,13 +92,14 @@ goblinEls.forEach((tile) => {
         tile.style.backgroundImage = FORESTLOOKUP[tileArrPosition]
         if(!choice1){//If choice1 has no value
             choice1 = tileArrPosition; //give choice1 value of tileArrPos.
-        //declare choice1 coordinates to global var
+            tile1= tile//declare choice1 coordinates to global var
         }else if(!choice2){ //If choice1 has value, look for value at choice2
             choice2 = tileArrPosition; //If no value found, give choice2 value of tileArrPos.
-        //declare choice2 to global variable
+            tile2 = tile//declare choice2 to global variable
             checkForMatch(choice1,choice2) //compare choices & ++correctMatch || ++wrongMatch
             console.log("this is wrongMatch", wrongMatch) 
             console.log("this is correctMatch", correctMatch)
+            renderScore()
             determineWin() //Check for when wrongMatch || correctMatch functions are met.. if so LET IT RIP and end game
         }
     })
@@ -112,6 +113,8 @@ function checkForMatch (c1, c2){ //Player Choice will always contain 2 choices
         console.log("We got ONE!")  ; 
         return correctMatch++; //if choices are equal return ++truthy value
     }else{
+        tile1.style.backgroundImage = "";
+        tile2.style.backgroundImage = "";
         console.log()
         choice1 = null;//empty choice1
         choice2 = null;//empty choice2
@@ -128,15 +131,16 @@ function renderScore(){
 
 //DETERMINES WIN
 function determineWin(){
+    console.log(messageEl)
     const winner = (correctMatch === 6); //if player makes 6 correct matches, they win
     const loser = (wrongMatch === 4); //if player makes 4 wrong matches, they lose
     if (winner === true){ //if WINNER remove gameboard and add win text
-        forest.style.display = "none"
-        messageEl.innerText = 'YOU HAVE WON!';
+        forestEl.style.display = "none"
+        messageEl.innerHTML = 'YOU HAVE WON!';
         }
     if(loser === true){ // if LOSER remove gameboard and add loss text
-        forest.style.display = "none";
-        messageEl.innerText = 'YOU HAVE LOST!';
+        forestEl.style.display = "none";
+        messageEl.innerHTML = 'YOU HAVE LOST!';
         playButton.style.backgroundColor = "antiqueWhite";// 'hides' functionality
         playButton.style.color = "black";
     }
@@ -152,7 +156,9 @@ playButton.addEventListener ('click', () =>{
     initialLaunch(); //launches gameboard
     playButton.style.backgroundColor = "brown";// shows 'change' in functionality
     playButton.style.color = "burlywood";
+    forestEl.style.display = "grid";
     correctMatch = 0;
     wrongMatch = 0;
-
+    renderScore()
+console.log("this is launch")
 });
